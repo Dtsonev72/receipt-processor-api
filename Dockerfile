@@ -1,17 +1,22 @@
-# Use an official openjdk image as a parent image
-FROM openjdk:22
+# Stage 1: Build the application
+FROM gradle:8.10.0-jdk22-alpine AS builder
+WORKDIR /home/app
 
-# Set the working directory
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
+# Copy the entire project to the container
 COPY . .
 
-# Build the application
-RUN ./gradlew clean build
+# Use the Gradle wrapper to build the project
+RUN gradle clean build
 
-# Make port 8080 available to the world outside this container
+# Stage 2: Run the application
+FROM openjdk:22-slim AS my-app
+WORKDIR /app
+
+# Copy the built JAR file from the builder stage
+COPY --from=builder /home/app/build/libs/*.jar /app/app.jar
+
+# Expose the application port
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "build/libs/receipt-processor-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]

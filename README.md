@@ -8,9 +8,9 @@ This is a Kotlin-based Spring Boot application that processes receipts and calcu
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Testing](#testing)
 - [API Endpoints](#api-endpoints)
 - [Business Rules](#business-rules)
-- [Testing](#testing)
 
 ## Features
 
@@ -64,6 +64,19 @@ To run the application in a Docker container:
     ```bash
     docker run -p 8080:8080 receipt-processor-api
     ```
+### Testing
+#### Running unit test cases
+To run the unit tests, use the following command:
+```bash
+./gradlew test
+```
+
+#### Testing with Docker
+If you're using Docker, you can also run tests inside a Docker container:
+```bash
+docker build -t receipt-processor-api .
+docker run receipt-processor-api ./gradlew test
+```
 
 ### Usage
 #### Process a Receipt
@@ -130,17 +143,3 @@ The points are calculated based on the following rules:
 * If the trimmed length of the item description is a multiple of 3, multiply the price by `0.2` and round up to the nearest integer. The result is the number of points earned.
 * 6 points if the day in the purchase date is odd.
 * 10 points if the time of purchase is after 2:00pm and before 4:00pm.
-
-### Testing
-#### Running unit test cases
-To run the unit tests, use the following command:
-```bash
-./gradlew test
-```
-
-#### Testing with Docker
-If you're using Docker, you can also run tests inside a Docker container:
-```bash
-docker build -t receipt-processor-api .
-docker run receipt-processor-api ./gradlew test
-```
