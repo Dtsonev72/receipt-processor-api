@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ReceiptProcessor
+class ReceiptApplication
 
 fun main(args: Array<String>) {
-    runApplication<ReceiptProcessor>(*args)
+    runApplication<ReceiptApplication>(*args)
 }
