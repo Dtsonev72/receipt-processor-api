@@ -42,8 +42,7 @@ class PointsCalculator {
 
         // 10 points if the time is between 2:00pm and 4:00pm
         val time = receipt.purchaseTime.split(":")[0].toInt()
-        val minutes = receipt.purchaseTime.split(":")[1].toInt()
-        if (time == 14 || (time == 15 && minutes == 0)) {
+        if (time == 14 || time == 15 ) {
             points += 10
         }
 

@@ -50,7 +50,7 @@ class PointsCalculatorTest {
         val receipt = Receipt(
             retailer = "Retailer123!", // 11 points
             purchaseDate = "2023-01-01", // 6 points
-            purchaseTime = "14:30", // 10 points
+            purchaseTime = "15:30", // 10 points
             items = listOf(
                 Item("Item 1", "1.00"), // 0.2 points ~ 1 point
                 Item("Item123", "12.00")
